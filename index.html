@@ -1,1 +1,3326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>BLSOLS ADMIN | JIINUE, JIJENGEE, JITEGEMEE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2d3e9f;
+            --dark-blue: #1a2a7a;
+            --light-blue: #3d5bb8;
+            --purple-pink: #c77ba0;
+            --yellow: #ffcc00;
+            --orange: #ff8a65;
+            --dark-orange: #e67e22;
+            --coral: #f8a771;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --pink: #e85d9f;
+            --dark-popup: #1e2a4a;
+            --darker-popup: #152238;
+            --admin-red: #e74c3c;
+            --admin-green: #27ae60;
+            --admin-orange: #f39c12;
+            --mpesa-green: #00A650;
+            --verified-green: #27ae60;
+            --error-red: #e74c3c;
+            --border-orange: #ff8a65;
+            --google-red: #DB4437;
+            --google-blue: #4285F4;
+            --google-green: #0F9D58;
+            --google-yellow: #F4B400;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--primary-blue);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 100;
+            border-bottom: 2px solid var(--border-orange);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+        }
+
+        .logo-circles {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 5px 0;
+        }
+
+        .logo-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .circle-blue {
+            background-color: var(--primary-blue);
+        }
+
+        .circle-yellow {
+            background-color: var(--yellow);
+        }
+
+        .circle-white {
+            background-color: var(--white);
+        }
+
+        .circle-green {
+            background-color: #4CAF50;
+        }
+
+        .logo-text {
+            margin-left: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--white);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-text span {
+            color: var(--yellow);
+        }
+
+        .navigation-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--yellow);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--yellow);
+            color: var(--dark-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--orange);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background-color: var(--admin-red);
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-warning {
+            background-color: var(--admin-orange);
+            color: white;
+            border: none;
+        }
+
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+
+        .btn-logout {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 1px solid var(--white);
+        }
+
+        .btn-logout:hover {
+            background-color: var(--admin-red);
+            border-color: var(--admin-red);
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: flex-start;
+            animation: modalFadeIn 0.3s ease-out;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .login-container {
+            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 450px;
+            margin: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-orange);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .login-container::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .login-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .login-container::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+            border-radius: 10px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h2 {
+            color: var(--yellow);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .login-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--white);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .login-close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            color: var(--yellow);
+        }
+
+        .google-login-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .google-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .google-login-btn i.fa-google {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #DB4437, #4285F4, #0F9D58, #F4B400);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .divider span {
+            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
+            padding: 0 10px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Email Confirmation Modal */
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2100;
+            justify-content: center;
+            align-items: flex-start;
+            animation: modalFadeIn 0.3s ease-out;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .confirm-container {
+            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+            animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-orange);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .confirm-container::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .confirm-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .confirm-container::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+            border-radius: 10px;
+        }
+
+        .confirm-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--white);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .confirm-close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            color: var(--yellow);
+        }
+
+        .confirm-icon {
+            font-size: 4rem;
+            color: var(--mpesa-green);
+            margin-bottom: 1rem;
+        }
+
+        .confirm-title {
+            font-size: 1.5rem;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+        }
+
+        .confirm-message {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .code-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .code-input input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+        }
+
+        .code-input input:focus {
+            outline: none;
+            border-color: var(--yellow);
+        }
+
+        .resend-code {
+            background: none;
+            border: none;
+            color: var(--yellow);
+            cursor: pointer;
+            margin-top: 1rem;
+            text-decoration: underline;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none !important;
+            min-height: calc(100vh - 200px);
+            padding: 80px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .page.active {
+            display: block !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 204, 0, 0.1) 0%, transparent 50%);
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-left {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .welcome-message {
+            position: relative;
+            padding: 0;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .welcome-message h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: titleSlide 1.2s ease-out;
+        }
+
+        @keyframes titleSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-message h1 span {
+            color: var(--yellow);
+            position: relative;
+            display: inline-block;
+        }
+
+        .welcome-message p {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--white);
+            animation: textReveal 1.5s ease-out 0.5s both;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes textReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slogan {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            animation: glow 2s infinite alternate, sloganSlide 1s ease-out 1s both;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+        }
+
+        @keyframes sloganSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.6);
+            }
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            animation: slideInRight 1s ease-out;
+            margin-left: -50px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* How It Works Card */
+        .how-it-works-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+            width: 100%;
+            border: 1px solid var(--border-orange);
+        }
+
+        .how-it-works-card h3 {
+            color: var(--yellow);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .process-step {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--border-orange);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--yellow);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Registration Form Section */
+        .registration-card {
+            background-color: rgba(61, 91, 184, 0.4);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
+            margin: 0 auto;
+            border: 1px solid var(--border-orange);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .registration-card::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .registration-card::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .registration-card::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+            border-radius: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            background: linear-gradient(145deg, rgba(26, 42, 122, 0.95), rgba(21, 34, 56, 0.95));
+            padding: 10px 0;
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .form-header h2 {
+            color: var(--coral);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .form-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--white);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            color: var(--yellow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .form-group label .required {
+            color: var(--admin-red);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(90, 127, 209, 0.3);
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: var(--pink);
+        }
+
+        .form-control.error {
+            border-color: var(--error-red);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            color: var(--verified-green);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .phone-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .country-code {
+            width: 100px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(90, 127, 209, 0.3);
+            color: var(--white);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .phone-number {
+            flex: 1;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--coral);
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--orange);
+        }
+
+        .strength-bar {
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-level {
+            height: 100%;
+            width: 30%;
+            background-color: var(--orange);
+            border-radius: 2px;
+        }
+
+        .terms-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .terms-checkbox {
+            margin-right: 10px;
+            margin-top: 3px;
+            accent-color: var(--pink);
+        }
+
+        .terms-label {
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .terms-label a {
+            color: #ff4d4d;
+            text-decoration: none;
+        }
+
+        .terms-label a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(to right, #ff8a65, #ff6f4f);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(to right, #ff9a75, #ff7f5f);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-btn::after {
+            content: "→";
+            margin-left: 8px;
+        }
+
+        /* Dashboard Section */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid var(--border-orange);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .greeting {
+            font-size: 1.5rem;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--purple-pink));
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid transparent;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--border-orange);
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .description-box {
+            background-color: var(--orange);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-orange);
+        }
+
+        .description-box h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .description-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .description-box li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .description-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Contact Page */
+        .contact-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-form-box, .contact-info-box {
+            background-color: rgba(61, 91, 184, 0.4);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-orange);
+        }
+
+        .contact-form-box h3, .contact-info-box h3 {
+            color: var(--yellow);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .contact-details {
+            margin-bottom: 20px;
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--yellow);
+            width: 20px;
+        }
+
+        /* Admin Panel Styles */
+        .admin-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--dark-popup), var(--darker-popup));
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border-orange);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--yellow);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-table th {
+            background-color: rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+
+        .admin-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background-color: var(--admin-green);
+            color: white;
+        }
+
+        .status-suspended {
+            background-color: var(--admin-red);
+            color: white;
+        }
+
+        .status-deactivated {
+            background-color: #7f8c8d;
+            color: white;
+        }
+
+        .status-pending {
+            background-color: var(--orange);
+            color: white;
+        }
+
+        .status-verified {
+            background-color: var(--verified-green);
+            color: white;
+        }
+
+        .status-limiter-active {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .status-limiter-inactive {
+            background-color: #9e9e9e;
+            color: white;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .small-btn {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+
+        /* User Limit Card */
+        .limiter-card {
+            background: linear-gradient(135deg, var(--dark-popup), var(--darker-popup));
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-orange);
+        }
+
+        .limiter-title {
+            font-size: 1.3rem;
+            color: var(--yellow);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .limiter-title i {
+            font-size: 1.5rem;
+        }
+
+        .limiter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .limiter-select {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(90, 127, 209, 0.3);
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .limiter-select option {
+            background-color: var(--dark-popup);
+            color: var(--white);
+        }
+
+        .limiter-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .limiter-btn-active {
+            background-color: var(--admin-green);
+            color: white;
+        }
+
+        .limiter-btn-active:hover {
+            background-color: #219a52;
+            transform: translateY(-2px);
+        }
+
+        .limiter-btn-inactive {
+            background-color: var(--admin-orange);
+            color: white;
+        }
+
+        .limiter-btn-inactive:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .limiter-status {
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        .limiter-status-active {
+            background-color: rgba(33, 150, 243, 0.2);
+            border-left: 4px solid #2196F3;
+            color: #87CEFA;
+        }
+
+        .limiter-status-inactive {
+            background-color: rgba(156, 156, 156, 0.2);
+            border-left: 4px solid #9e9e9e;
+            color: #b0b0b0;
+        }
+
+        .current-stats {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .current-stats span {
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: flex-start;
+            animation: modalFadeIn 0.3s ease-out;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        @keyframes modalFadeIn {
+            from { 
+                opacity: 0;
+                background-color: rgba(0, 0, 0, 0);
+            }
+            to { 
+                opacity: 1;
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: var(--white);
+            border: 1px solid var(--border-orange);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+            border-radius: 10px;
+        }
+
+        @keyframes modalSlideUp {
+            from { 
+                transform: translateY(50px) scale(0.95); 
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0) scale(1); 
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
+            z-index: 1;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--yellow);
+            font-weight: 700;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--white);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .close-modal:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            color: var(--yellow);
+        }
+
+        .package-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .package-option {
+            flex: 1;
+            min-width: 100px;
+            padding: 1rem;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+        }
+
+        .package-option:hover {
+            border-color: var(--yellow);
+            transform: translateY(-3px);
+        }
+
+        .package-option.selected {
+            border-color: var(--yellow);
+            background-color: rgba(255, 204, 0, 0.1);
+        }
+
+        .calculation-results {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .calculation-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .calculation-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            color: var(--yellow);
+        }
+
+        /* STK Push Modal */
+        .stk-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: modalFadeIn 0.3s ease-out;
+            padding: 20px;
+        }
+
+        .stk-content {
+            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-orange);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .stk-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .stk-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .stk-content::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+            border-radius: 10px;
+        }
+
+        .stk-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--white);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .stk-close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+            color: var(--yellow);
+        }
+
+        .stk-icon {
+            font-size: 4rem;
+            color: var(--mpesa-green);
+            margin-bottom: 1rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        .stk-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .stk-amount {
+            font-size: 2rem;
+            color: var(--yellow);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .stk-details {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .stk-detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .stk-loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid var(--mpesa-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Transaction Card */
+        .transaction-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-orange);
+        }
+
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .transaction-table th {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .transaction-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-blue);
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 2px solid var(--border-orange);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            margin-bottom: 20px;
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        .contact-info-footer {
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .contact-info-footer p {
+            margin-bottom: 5px;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            color: var(--white);
+        }
+
+        /* Chatbot Styles */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--purple-pink));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+            border: 2px solid var(--border-orange);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-icon i {
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .chatbot-container {
+            position: fixed;
+            bottom: 5rem;
+            right: 2rem;
+            width: 350px;
+            height: 450px;
+            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid var(--border-orange);
+            animation: chatbotSlideUp 0.3s ease-out;
+        }
+
+        @keyframes chatbotSlideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--purple-pink));
+            color: var(--white);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-orange);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .message {
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: messageFadeIn 0.3s ease-out;
+        }
+
+        @keyframes messageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .bot-message {
+            background-color: rgba(255, 255, 255, 0.1);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--primary-blue), var(--purple-pink));
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            margin-right: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .chatbot-input input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .chatbot-input button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--purple-pink));
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .hero-right {
+                align-items: center;
+                margin-left: 0;
+            }
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+            .navigation-container {
+                margin-left: 0;
+                flex-direction: column;
+                width: 100%;
+            }
+            nav ul {
+                margin-top: 15px;
+                margin-right: 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 5px 10px;
+            }
+            .auth-buttons {
+                margin-top: 15px;
+            }
+            .dashboard-actions {
+                grid-template-columns: 1fr;
+            }
+            .action-row {
+                flex-direction: column;
+            }
+            .package-options {
+                flex-direction: column;
+            }
+            .admin-actions {
+                flex-direction: column;
+            }
+            .admin-table {
+                font-size: 0.8rem;
+            }
+            .admin-table th, .admin-table td {
+                padding: 8px;
+            }
+            .admin-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .phone-input {
+                flex-direction: column;
+            }
+            .country-code {
+                width: 100%;
+            }
+            .limiter-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .login-container {
+                padding: 1.5rem;
+                margin: 10px;
+            }
+            .code-input input {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .registration-card {
+                max-height: 90vh;
+                padding: 25px;
+            }
+            .modal-content {
+                max-height: 90vh;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-row {
+                gap: 5px;
+            }
+            .logo-circle {
+                width: 15px;
+                height: 15px;
+            }
+            .logo-text {
+                font-size: 20px;
+            }
+            .welcome-message h1 {
+                font-size: 1.8rem;
+            }
+            .slogan {
+                font-size: 1.2rem;
+            }
+            .stk-content {
+                padding: 1.5rem;
+            }
+            .stk-amount {
+                font-size: 1.5rem;
+            }
+            .chatbot-container {
+                width: 95%;
+                right: 2.5%;
+            }
+            .admin-stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-content {
+                max-height: 85vh;
+                padding: 1rem;
+            }
+            .code-input input {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            .form-header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-circles">
+                    <div class="logo-row"><div class="logo-circle circle-yellow"></div></div>
+                    <div class="logo-row"><div class="logo-circle circle-blue"></div><div class="logo-circle circle-white"></div></div>
+                    <div class="logo-row"><div class="logo-circle circle-green"></div></div>
+                </div>
+                <div class="logo-text">BLS<span>OLS</span>.COM</div>
+            </div>
+            <div class="navigation-container">
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                        <li><a href="#" class="nav-link" data-page="how-it-works">How It Works</a></li>
+                        <li><a href="#" class="nav-link" data-page="transaction-history">Transaction History</a></li>
+                        <li><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
+                        <li><a href="#" class="nav-link" data-page="admin">BLSOLS ADMIN</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons" id="auth-buttons">
+                    <button class="btn btn-secondary" id="loginBtn">Login</button>
+                    <button class="btn btn-primary" id="registerBtn">Register</button>
+                </div>
+                <div id="logout-container" style="display: none;">
+                    <button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="login-modal">
+        <div class="login-container">
+            <button class="login-close-btn" id="loginCloseBtn">&times;</button>
+            <div class="login-header">
+                <h2>Welcome Back!</h2>
+                <p>Login to your BLSOLS account</p>
+            </div>
+            
+            <!-- Phone/Password Login Form -->
+            <form id="passwordLoginForm">
+                <div class="form-group">
+                    <label>Phone Number (Account Number)</label>
+                    <input type="tel" id="login-phone" class="form-control" placeholder="712345678" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-container">
+                        <input type="password" id="login-password" class="form-control" placeholder="Enter password" required>
+                        <button type="button" class="toggle-password" onclick="toggleLoginPassword()"><i class="fas fa-eye-slash"></i></button>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" style="margin-top: 1rem;">Login with Password</button>
+            </form>
+            
+            <div class="divider"><span>OR</span></div>
+            
+            <!-- Google Sign-In Button -->
+            <button class="google-login-btn" id="google-login-btn">
+                <i class="fab fa-google"></i> Sign in with Google
+            </button>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#" id="forgot-password-modal-link" style="color: var(--coral); text-decoration: none; font-size: 0.9rem;">Forgot Password?</a>
+            </div>
+            <div style="text-align: center; margin-top: 0.5rem;">
+                <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Don't have an account? <a href="#" id="register-from-login" style="color: var(--yellow);">Register here</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Email Confirmation Modal -->
+    <div id="confirm-modal" class="confirm-modal">
+        <div class="confirm-container">
+            <button class="confirm-close-btn" id="confirmCloseBtn">&times;</button>
+            <div class="confirm-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <h3 class="confirm-title">Verify Your Email</h3>
+            <p class="confirm-message">We've sent a verification code to <strong id="confirm-email">your email</strong>. Please enter it below to complete your registration.</p>
+            <div class="code-input">
+                <input type="text" maxlength="1" class="code-digit" data-index="0">
+                <input type="text" maxlength="1" class="code-digit" data-index="1">
+                <input type="text" maxlength="1" class="code-digit" data-index="2">
+                <input type="text" maxlength="1" class="code-digit" data-index="3">
+                <input type="text" maxlength="1" class="code-digit" data-index="4">
+                <input type="text" maxlength="1" class="code-digit" data-index="5">
+            </div>
+            <button class="btn btn-primary" id="verify-code-btn" style="width: 100%;">Verify Account</button>
+            <button class="resend-code" id="resend-code-btn">Resend Code</button>
+            <button class="btn btn-secondary" id="close-confirm-btn" style="margin-top: 1rem; width: 100%;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="container hero">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="welcome-message">
+                        <h1>Welcome to <span>BLSOLS.COM</span> Community</h1>
+                        <p>BLSOLS.COM is an online platform for interested and like minded individuals with the common goal and aim of being financially and economically independent through an online self help grouping system, also termed as MERRY-GO-ROUND.</p>
+                        <div class="slogan">JIINUE, JIJENGE, JITEGEMEE</div>
+                        <button class="btn btn-primary" id="heroRegisterBtn">Get Started</button>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="how-it-works-card">
+                        <h3>Quick Overview</h3>
+                        <div class="process-steps">
+                            <div class="process-step"><div class="step-icon"><i class="fas fa-user-plus"></i></div><div class="step-title">Free Registration</div><div class="step-description">Create your account with valid National ID and M-Pesa number - account number is your phone</div></div>
+                            <div class="process-step"><div class="step-icon"><i class="fas fa-box"></i></div><div class="step-title">Choose Package</div><div class="step-description">Select from 24HRS, 5 Days, or 10 Days packages that suit your needs</div></div>
+                            <div class="process-step"><div class="step-icon"><i class="fas fa-hand-holding-usd"></i></div><div class="step-title">Get Returns</div><div class="step-description">Receive your donation via M-Pesa Paybill within 24 hours after claiming</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Page -->
+    <section id="about" class="page">
+        <div class="container">
+            <div class="about-content" style="background-color: rgba(255,255,255,0.1); border-radius: 15px; padding: 40px; border: 1px solid var(--border-orange);">
+                <h2>About BLSOLS.COM</h2>
+                <p>Blsols.com is an online platform for interested and likeminded individuals with the common goal and aim of being financially and economically independent through an online self-help grouping system, also termed as Merry-Go-Round.</p>
+                <p>Powered by Brian's Life Solutions, a fully registered entity with the government and all the relevant authorities.</p>
+                <p>As our Slogan states, JIINUE JIJENGE JITEGEMEE, Indeed it would be just a matter of time before you experience a big of relief on your finances.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Page -->
+    <section id="how-it-works" class="page">
+        <div class="container">
+            <div class="about-content" style="background-color: rgba(255,255,255,0.1); border-radius: 15px; padding: 40px; border: 1px solid var(--border-orange);">
+                <h2>How It Works</h2>
+                <p>Learn how to participate and earn with BLSOLS.COM</p>
+                <h3>Complete Process Guide</h3>
+                <p><strong>1. Registration & Account Creation</strong><br>To register and create an account with Blsols.com is free. Your M-Pesa number becomes your account number. Valid National ID is required for verification.</p>
+                <p><strong>2. Package Selection & Fees</strong><br>Blsols.com charges 20% for 5/10 days packages and <strong style="color: var(--orange);">50% for the 24HRS package</strong>. Minimum amount is ksh1000/- and maximum amount is ksh20,000/-</p>
+                <p><strong>3. M-Pesa Paybill Payment</strong><br>After selecting your package, you'll receive an M-Pesa STK Push notification on your phone. Use Paybill Number: <strong>522533</strong> and Account Number: <strong>8059564</strong></p>
+                <p><strong>4. Claiming Donations</strong><br>After expiry of the Maturity Period, you can claim your donation. A recommitment fee of 20% (50% for 24HRS package) will be deducted automatically to keep the system sustainable.</p>
+                
+                <h3 style="margin-top: 40px;">Available Packages</h3>
+                <div class="packages-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                    <div class="package-card" style="background-color: rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; text-align: center; border: 1px solid var(--border-orange);"><div class="package-name">24HRS Package</div><div class="package-duration">24 Hours Duration</div><div class="package-amount">Up to Ksh 10,000</div><div class="package-fee" style="color: var(--orange);">50% Service Fee</div><ul class="package-features" style="list-style: none; text-align: left;"><li>✓ Fastest returns</li><li>✓ Higher service fee</li><li>✓ Perfect for quick needs</li></ul></div>
+                    <div class="package-card featured" style="background-color: rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; text-align: center; border: 2px solid var(--yellow);"><div class="package-name">5 Days Package</div><div class="package-duration">5 Days Duration</div><div class="package-amount">Up to Ksh 20,000</div><div class="package-fee">20% Service Fee</div><ul class="package-features" style="list-style: none; text-align: left;"><li>✓ Balanced duration</li><li>✓ Lower service fee</li><li>✓ Most popular choice</li></ul></div>
+                    <div class="package-card" style="background-color: rgba(255,255,255,0.1); border-radius: 10px; padding: 25px; text-align: center; border: 1px solid var(--border-orange);"><div class="package-name">10 Days Package</div><div class="package-duration">10 Days Duration</div><div class="package-amount">Up to Ksh 30,000</div><div class="package-fee">20% Service Fee</div><ul class="package-features" style="list-style: none; text-align: left;"><li>✓ Longer duration</li><li>✓ Lower service fee</li><li>✓ Higher maximum amount</li></ul></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transaction History Page -->
+    <section id="transaction-history" class="page">
+        <div class="container">
+            <div class="about-content" style="background-color: rgba(255,255,255,0.1); border-radius: 15px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-orange);"><h2>Transaction History</h2><p>View your account transactions and financial activities</p></div>
+            <div class="transaction-card"><h3>Recent Transactions</h3><div style="overflow-x: auto; width: 100%;"><table class="transaction-table" id="user-transactions-table" style="min-width: 500px;"><thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead><tbody id="user-transactions-body"><tr><td colspan="4">No transactions yet</td></tr></tbody></table></div></div>
+            <div class="transaction-card"><h3>Account Summary</h3><div id="account-summary"></div></div>
+        </div>
+    </section>
+
+    <!-- Contact Us Page -->
+    <section id="contact" class="page">
+        <div class="container">
+            <div class="about-content" style="background-color: rgba(255,255,255,0.1); border-radius: 15px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-orange);"><h2>Contact Us</h2><p>We're here to help with any questions or concerns you may have about our services.</p></div>
+            <div class="contact-wrapper">
+                <div class="contact-form-box">
+                    <h3><i class="fas fa-envelope"></i> Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group"><label for="contact-name">Your Name</label><input type="text" id="contact-name" class="form-control" required></div>
+                        <div class="form-group"><label for="contact-email">Your Email</label><input type="email" id="contact-email" class="form-control" required></div>
+                        <div class="form-group"><label for="contact-subject">Subject</label><input type="text" id="contact-subject" class="form-control" required></div>
+                        <div class="form-group"><label for="contact-message">Message</label><textarea id="contact-message" class="form-control" rows="5" required></textarea></div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info-box">
+                    <h3><i class="fas fa-address-card"></i> Get In Touch</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> P.O. Box 10055 - 00400 Nairobi</p>
+                        <p><i class="fas fa-envelope"></i> blsols@yahoo.com</p>
+                        <p><i class="fas fa-globe"></i> www.blsols.com</p>
+                        <p><i class="fas fa-phone"></i> <strong>0759184375</strong> / <strong>0787959119</strong></p>
+                    </div>
+                    <h3><i class="fas fa-money-bill-wave"></i> M-Pesa Paybill Details</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-building"></i> Business Number: <strong>522533</strong></p>
+                        <p><i class="fas fa-hashtag"></i> Account Number: <strong>8059564</strong></p>
+                    </div>
+                    <h3><i class="fas fa-clock"></i> Support Hours</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-clock"></i> Monday - Friday: 8:00 AM - 8:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Saturday: 9:00 AM - 5:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Sunday: 10:00 AM - 2:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Page -->
+    <section id="register" class="page">
+        <div class="container">
+            <div class="registration-card">
+                <div class="form-header">
+                    <h2>CREATE ACCOUNT</h2>
+                    <button class="form-close-btn" id="registerCloseBtn">&times;</button>
+                </div>
+                <form id="registerForm">
+                    <div class="form-row">
+                        <div class="form-group"><label for="firstName">First Name <span class="required">*</span></label><input type="text" id="firstName" class="form-control" placeholder="Enter first name" required></div>
+                        <div class="form-group"><label for="lastName">Last Name <span class="required">*</span></label><input type="text" id="lastName" class="form-control" placeholder="Enter last name" required></div>
+                    </div>
+                    <div class="form-group"><label for="email">Email Address <span class="required">*</span></label><input type="email" id="reg-email" class="form-control" placeholder="Enter email address" required><div id="emailError" class="error-message">Please enter a valid email address</div><div id="emailSuccess" class="success-message">✓ Email verified</div></div>
+                    <div class="form-group"><label for="nationalId">National ID Number <span class="required">*</span></label><input type="text" id="nationalId" class="form-control" placeholder="Enter National ID" required><div id="nationalIdError" class="error-message">Please enter a valid National ID</div><div id="nationalIdSuccess" class="success-message">✓ National ID verified</div></div>
+                    <div class="form-group"><label for="phoneNumber">M-Pesa Number (Account Number) <span class="required">*</span></label><div class="phone-input"><div class="country-code">+254</div><input type="tel" id="phoneNumber" class="form-control phone-number" placeholder="712345678" maxlength="9" required></div><div id="phoneError" class="error-message">Invalid phone number. Must be 9 digits starting with 7 or 1.</div><div id="phoneSuccess" class="success-message">✓ Phone number verified</div></div>
+                    <div class="form-group"><label for="password">Create Password <span class="required">*</span></label><div class="password-container"><input type="password" id="password" class="form-control" placeholder="Create password (min 8 characters)" required><button type="button" class="toggle-password" id="togglePassword"><i class="fas fa-eye-slash"></i></button></div><div class="password-strength">Weak</div><div class="strength-bar"><div class="strength-level"></div></div></div>
+                    <div class="form-group"><label for="confirmPassword">Confirm Password <span class="required">*</span></label><div class="password-container"><input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required></div><div id="passwordError" class="error-message">Passwords do not match</div><div id="passwordSuccess" class="success-message">✓ Passwords match</div></div>
+                    <div class="terms-group"><input type="checkbox" id="termsCheckbox" class="terms-checkbox" required><label for="termsCheckbox" class="terms-label">I agree to the <a href="#" id="termsLink">Terms & Conditions</a></label></div>
+                    <div class="terms-group"><input type="checkbox" id="verificationCheckbox" class="terms-checkbox" required><label for="verificationCheckbox" class="terms-label">I confirm that my details are correct</label></div>
+                    <button type="submit" class="submit-btn" id="registerSubmitBtn">REGISTER</button>
+                </form>
+                <div style="text-align: center; margin-top: 1rem;"><a href="#" id="forgot-password-link" style="color: var(--coral); text-decoration: none;">Forgot Password?</a></div>
+                <div style="text-align: center; margin-top: 0.5rem;"><p style="font-size: 0.8rem;">Already have an account? <a href="#" id="login-from-register" style="color: var(--yellow);">Login here</a></p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Page -->
+    <section id="dashboard" class="page">
+        <div class="container">
+            <div class="dashboard-header"><div class="user-info"><div id="user-greeting">Welcome, User!</div><div id="user-status-badge" style="margin-left: 10px;"></div><div id="user-verification-badge" style="margin-left: 10px;"></div></div><div id="current-date-time"></div></div>
+            <h1 class="greeting">Welcome to BLSOLS.COM Community</h1>
+            <h2 class="slogan">JIINUE, JIJENGEE, JITEGEMEE</h2>
+            <div class="dashboard-actions">
+                <div class="action-row"><button class="action-btn" id="participate-btn">PARTICIPATE</button><button class="action-btn" id="claim-btn">CLAIM</button></div>
+                <div class="action-row"><button class="action-btn" id="status-btn">MY STATUS</button><button class="action-btn" id="invite-btn">Invite a Friend</button></div>
+                <div class="action-row"><button class="action-btn btn-secondary" id="close-btn">Close</button></div>
+            </div>
+            <div class="dashboard-content">
+                <div><h3>Your Participation History</h3><div id="participation-history"><p>No participation history yet.</p></div></div>
+                <div class="description-box"><h3>Brief Description</h3><ul><li>Get 100% returns on your investment</li><li>Choose from 24hr, 5-day or 10-day packages</li><li>Pay via M-Pesa Paybill 522533</li><li>Earn Ksh. 300 for each successful referral</li><li>Your M-Pesa number is your account number</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel Page -->
+    <section id="admin" class="page">
+        <div class="container">
+            <div class="about-content" style="background-color: rgba(255,255,255,0.1); border-radius: 15px; padding: 40px; margin-bottom: 30px; border: 1px solid var(--border-orange);">
+                <h2><i class="fas fa-shield-alt"></i> BLSOLS ADMIN</h2>
+                <p>System Management and Overview Panel - User Management Controls</p>
+            </div>
+            <div style="background-color: rgba(231, 76, 60, 0.2); border-left: 4px solid var(--admin-red); padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
+                <p><strong>⚠️ Admin Access Only</strong> - This area contains sensitive system information. Use with caution.</p>
+            </div>
+            
+            <div class="admin-stats-grid">
+                <div class="stat-card"><div class="stat-number" id="admin-total-users">0</div><div class="stat-label">Total Registered</div></div>
+                <div class="stat-card"><div class="stat-number" id="admin-active-users">0</div><div class="stat-label">Active Users</div></div>
+                <div class="stat-card"><div class="stat-number" id="admin-suspended-users">0</div><div class="stat-label">Suspended Users</div></div>
+                <div class="stat-card"><div class="stat-number" id="admin-verified-users">0</div><div class="stat-label">Verified Users</div></div>
+                <div class="stat-card"><div class="stat-number" id="admin-total-participations">0</div><div class="stat-label">Participations</div></div>
+                <div class="stat-card"><div class="stat-number" id="admin-total-volume">Ksh 0</div><div class="stat-label">Total Volume</div></div>
+            </div>
+            
+            <div class="limiter-card">
+                <div class="limiter-title">
+                    <i class="fas fa-users-slash"></i>
+                    <span>User Limit Control</span>
+                </div>
+                <div class="limiter-controls">
+                    <select id="limitSelect" class="limiter-select">
+                        <option value="0">No Limit (Unlimited Users)</option>
+                        <option value="10">Maximum 10 Users</option>
+                        <option value="20">Maximum 20 Users</option>
+                        <option value="50">Maximum 50 Users</option>
+                        <option value="100">Maximum 100 Users</option>
+                        <option value="200">Maximum 200 Users</option>
+                        <option value="500">Maximum 500 Users</option>
+                        <option value="1000">Maximum 1000 Users</option>
+                        <option value="2000">Maximum 2000 Users</option>
+                        <option value="5000">Maximum 5000 Users</option>
+                    </select>
+                    <button class="limiter-btn limiter-btn-active" id="activateLimiterBtn">
+                        <i class="fas fa-lock"></i> APPLY USER LIMIT
+                    </button>
+                    <button class="limiter-btn limiter-btn-inactive" id="deactivateLimiterBtn">
+                        <i class="fas fa-lock-open"></i> REMOVE USER LIMIT
+                    </button>
+                </div>
+                <div id="limiterStatusBox" class="limiter-status limiter-status-inactive">
+                    <i class="fas fa-info-circle"></i> User Limit is currently <strong>INACTIVE</strong>. Unlimited users allowed on the platform.
+                </div>
+                <div id="currentStatsBox" class="current-stats">
+                    <i class="fas fa-chart-line"></i> Current Users: <span id="currentUserCount">0</span> | 
+                    User Limit: <span id="userLimitDisplay">Not Set</span> | 
+                    Status: <span id="limiterActiveStatus">Inactive</span> |
+                    Remaining Slots: <span id="remainingSlots">Unlimited</span>
+                </div>
+            </div>
+            
+            <div class="transaction-card"><h3>Quick Actions</h3><div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;"><button class="btn btn-primary" onclick="exportAllData()"><i class="fas fa-download"></i> Export All Data</button><button class="btn btn-secondary" onclick="refreshAdminStats()"><i class="fas fa-sync-alt"></i> Refresh Stats</button><button class="btn btn-warning" onclick="clearAllTestData()"><i class="fas fa-trash-alt"></i> Clear Test Data</button><button class="btn btn-success" onclick="addSampleData()"><i class="fas fa-plus"></i> Add Sample Data</button></div></div>
+            
+            <div class="transaction-card"><h3>System Settings</h3><div class="form-row"><div class="form-group"><label>Service Fee (24HRS):</label><input type="number" id="admin-fee-24" class="form-control" value="50" step="5"></div><div class="form-group"><label>Service Fee (5/10 Days):</label><input type="number" id="admin-fee-other" class="form-control" value="20" step="5"></div><div class="form-group"><label>Referral Bonus (Ksh):</label><input type="number" id="admin-referral-bonus" class="form-control" value="300" step="50"></div></div><button class="btn btn-primary" onclick="saveSystemSettings()" style="margin-top: 1rem;">Save Settings</button></div>
+            
+            <div class="transaction-card"><h3><i class="fas fa-users"></i> User Management</h3><p style="margin-bottom: 1rem;">Actions: <span style="color: var(--admin-green);">● Activate</span> | <span style="color: var(--admin-orange);">● Suspend</span> | <span style="color: var(--admin-red);">● Deactivate</span> | <span style="color: #e74c3c;">● Delete</span></p><div style="overflow-x: auto; width: 100%;"><table class="admin-table" id="admin-users-table" style="min-width: 700px;"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone (Account)</th><th>National ID</th><th>Status</th><th>Verified</th><th>Actions</th></tr></thead><tbody id="admin-users-body"><tr><td colspan="8">No users registered yet</td></tr></tbody></table></div></div>
+            <div class="transaction-card"><h3><i class="fas fa-chart-line"></i> Participations Overview</h3><div style="overflow-x: auto; width: 100%;"><table class="admin-table" id="admin-participations-table" style="min-width: 700px;"><thead><tr><th>User</th><th>Package</th><th>Amount</th><th>Service Fee</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody id="admin-participations-body"><tr><td colspan="7">No participations yet</td></tr></tbody></table></div></div>
+        </div>
+    </section>
+
+    <!-- Participate Modal -->
+    <div id="participate-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Participate in BLSOLS</h3>
+                <button class="close-modal" id="participateCloseBtn">&times;</button>
+            </div>
+            <div style="max-height: calc(85vh - 100px); overflow-y: auto; padding-right: 5px;">
+                <p>Thank you for willing to participate, kindly select your preferred package.</p>
+                <div class="package-options"><div class="package-option" data-duration="24">24 HRS</div><div class="package-option" data-duration="5">5 DAYS</div><div class="package-option" data-duration="10">10 DAYS</div></div>
+                <div class="form-group"><label for="amount">Amount (Ksh)</label><input type="number" id="amount" class="form-control" min="1000" max="20000" step="1000" placeholder="Enter amount in thousands"></div>
+                <div class="calculation-results">
+                    <div class="calculation-row"><span>Wished Amount:</span><span id="wished-amount">Ksh 0</span></div>
+                    <div class="calculation-row"><span>Service Fee (<span id="service-fee-percent">20</span>%):</span><span id="service-fee">Ksh 0</span></div>
+                    <div class="calculation-row"><span>Your Interest (100%):</span><span id="your-interest">Ksh 0</span></div>
+                    <div class="calculation-row"><span>Total to Pay:</span><span id="total-to-pay">Ksh 0</span></div>
+                </div>
+                <div class="terms"><input type="checkbox" id="participation-terms" required><label for="participation-terms">I accept the Terms & Conditions for participation</label></div>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;"><button class="btn btn-secondary" id="cancel-participation">Cancel</button><button class="btn btn-primary" id="submit-participation">Pay with M-Pesa</button></div>
+        </div>
+    </div>
+
+    <!-- M-Pesa STK Push Modal -->
+    <div id="stk-modal" class="stk-modal">
+        <div class="stk-content">
+            <button class="stk-close-btn" id="stkCloseBtn">&times;</button>
+            <div class="stk-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3 class="stk-title">M-Pesa STK Push</h3>
+            <div class="stk-amount" id="stk-amount">Ksh 0</div>
+            <div class="stk-details">
+                <div class="stk-detail-row"><span>Paybill Number:</span><span>522533</span></div>
+                <div class="stk-detail-row"><span>Account Number:</span><span>8059564</span></div>
+                <div class="stk-detail-row"><span>Phone:</span><span id="stk-phone">+254XXXXXXXXX</span></div>
+            </div>
+            <div class="stk-loader"></div>
+            <div class="stk-message" id="stk-message">Waiting for your PIN input on M-Pesa...</div>
+            <div class="stk-timer" id="stk-timer">Time remaining: 60s</div>
+            <button class="btn btn-secondary" id="cancel-stk" style="margin-top: 1rem;">Cancel Payment</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo"><div class="logo"><div class="logo-circles"><div class="logo-row"><div class="logo-circle circle-yellow"></div></div><div class="logo-row"><div class="logo-circle circle-blue"></div><div class="logo-circle circle-white"></div></div><div class="logo-row"><div class="logo-circle circle-green"></div></div></div><div class="logo-text">BLS<span>OLS</span>.COM</div></div></div>
+                <div class="footer-text"><p>POWERED by Brian's Life Solutions</p></div>
+                <div class="contact-info-footer"><p>P.O. Box 10055 - 00400, Nairobi, Kenya</p><p>Email: blsols@yahoo.com | Website: www.blsols.com</p><p>Tel No: <strong>0759184375</strong> / <strong>0787959119</strong></p><p>M-Pesa Paybill: <strong>522533</strong> | Account: <strong>8059564</strong></p></div>
+                <div class="copyright"><p>Copyright © 2026 BLSOLS.COM. All rights reserved.</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-icon" id="chatbot-icon"><i class="fas fa-robot"></i></div>
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header"><h3>BLSOLS Assistant</h3><button class="close-modal" id="chatbotCloseBtn">&times;</button></div>
+        <div class="chatbot-messages" id="chatbot-messages"><div class="message bot-message">Hello! I'm here to help with any questions about BLSOLS. How can I assist you today?</div></div>
+        <div class="chatbot-input"><input type="text" id="chatbot-input" placeholder="Type your message..."><button id="send-message"><i class="fas fa-paper-plane"></i></button></div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const registerBtn = document.getElementById('registerBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const heroRegisterBtn = document.getElementById('heroRegisterBtn');
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        const verificationCheckbox = document.getElementById('verificationCheckbox');
+        const termsLink = document.getElementById('termsLink');
+        const registerForm = document.getElementById('registerForm');
+        const participateBtn = document.getElementById('participate-btn');
+        const claimBtn = document.getElementById('claim-btn');
+        const statusBtn = document.getElementById('status-btn');
+        const inviteBtn = document.getElementById('invite-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const participateModal = document.getElementById('participate-modal');
+        const stkModal = document.getElementById('stk-modal');
+        const packageOptions = document.querySelectorAll('.package-option');
+        const amountInput = document.getElementById('amount');
+        const wishedAmount = document.getElementById('wished-amount');
+        const serviceFeeSpan = document.getElementById('service-fee');
+        const serviceFeePercent = document.getElementById('service-fee-percent');
+        const yourInterest = document.getElementById('your-interest');
+        const totalToPay = document.getElementById('total-to-pay');
+        const cancelParticipation = document.getElementById('cancel-participation');
+        const submitParticipation = document.getElementById('submit-participation');
+        const cancelStk = document.getElementById('cancel-stk');
+        const userGreeting = document.getElementById('user-greeting');
+        const currentDateTime = document.getElementById('current-date-time');
+        const contactForm = document.getElementById('contactForm');
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
+        const chatbotIcon = document.getElementById('chatbot-icon');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const sendMessage = document.getElementById('send-message');
+        const authButtons = document.getElementById('auth-buttons');
+        const logoutContainer = document.getElementById('logout-container');
+        const userStatusBadge = document.getElementById('user-status-badge');
+        const userVerificationBadge = document.getElementById('user-verification-badge');
+        const nationalIdInput = document.getElementById('nationalId');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const nationalIdError = document.getElementById('nationalIdError');
+        const nationalIdSuccess = document.getElementById('nationalIdSuccess');
+        const phoneError = document.getElementById('phoneError');
+        const phoneSuccess = document.getElementById('phoneSuccess');
+        const passwordError = document.getElementById('passwordError');
+        const passwordSuccess = document.getElementById('passwordSuccess');
+        const regEmailInput = document.getElementById('reg-email');
+        const emailError = document.getElementById('emailError');
+        const emailSuccess = document.getElementById('emailSuccess');
+
+        // Close buttons
+        const loginCloseBtn = document.getElementById('loginCloseBtn');
+        const confirmCloseBtn = document.getElementById('confirmCloseBtn');
+        const registerCloseBtn = document.getElementById('registerCloseBtn');
+        const participateCloseBtn = document.getElementById('participateCloseBtn');
+        const stkCloseBtn = document.getElementById('stkCloseBtn');
+        const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+
+        // Close modal functions
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            pendingUser = null;
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('register').classList.remove('active');
+            showPage('home');
+        }
+
+        function closeParticipateModal() {
+            participateModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeStkModal() {
+            stkModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (stkTimer) clearInterval(stkTimer);
+        }
+
+        function closeChatbot() {
+            chatbotContainer.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Event listeners for close buttons
+        loginCloseBtn.addEventListener('click', closeLoginModal);
+        confirmCloseBtn.addEventListener('click', closeConfirmModal);
+        registerCloseBtn.addEventListener('click', closeRegisterModal);
+        participateCloseBtn.addEventListener('click', closeParticipateModal);
+        stkCloseBtn.addEventListener('click', closeStkModal);
+        chatbotCloseBtn.addEventListener('click', closeChatbot);
+
+        // Login Modal Elements
+        const loginModal = document.getElementById('login-modal');
+        const confirmModal = document.getElementById('confirm-modal');
+        const passwordLoginForm = document.getElementById('passwordLoginForm');
+        const googleLoginBtn = document.getElementById('google-login-btn');
+        const verifyCodeBtn = document.getElementById('verify-code-btn');
+        const resendCodeBtn = document.getElementById('resend-code-btn');
+        const closeConfirmBtn = document.getElementById('close-confirm-btn');
+        const registerFromLogin = document.getElementById('register-from-login');
+        const loginFromRegister = document.getElementById('login-from-register');
+
+        let pendingUser = null;
+        let verificationCode = null;
+        let stkTimer = null;
+        let stkTimeLeft = 60;
+
+        // Email validation
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        regEmailInput.addEventListener('input', function() {
+            const email = this.value;
+            if (validateEmail(email)) {
+                emailError.classList.remove('show');
+                emailSuccess.classList.add('show');
+                this.classList.remove('error');
+            } else if (email.length > 0) {
+                emailError.classList.add('show');
+                emailSuccess.classList.remove('show');
+                this.classList.add('error');
+            } else {
+                emailError.classList.remove('show');
+                emailSuccess.classList.remove('show');
+                this.classList.remove('error');
+            }
+        });
+
+        function toggleLoginPassword() {
+            const pwd = document.getElementById('login-password');
+            const icon = document.querySelector('.toggle-password i');
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
+                icon.className = 'fas fa-eye';
+            } else {
+                pwd.type = 'password';
+                icon.className = 'fas fa-eye-slash';
+            }
+        }
+
+        window.toggleLoginPassword = toggleLoginPassword;
+
+        // User Limit Variables
+        let userLimitActive = false;
+        let maxUsers = null;
+
+        function loadUserLimitState() {
+            const savedState = localStorage.getItem('userLimit');
+            if (savedState) {
+                const state = JSON.parse(savedState);
+                userLimitActive = state.active;
+                maxUsers = state.maxUsers;
+            }
+            updateUserLimitUI();
+        }
+
+        function saveUserLimitState() {
+            const state = { active: userLimitActive, maxUsers: maxUsers };
+            localStorage.setItem('userLimit', JSON.stringify(state));
+        }
+
+        function updateUserLimitUI() {
+            const statusBox = document.getElementById('limiterStatusBox');
+            const userLimitDisplay = document.getElementById('userLimitDisplay');
+            const limiterActiveStatus = document.getElementById('limiterActiveStatus');
+            const remainingSlotsSpan = document.getElementById('remainingSlots');
+            const currentCount = users.length;
+            
+            if (userLimitActive && maxUsers !== null && maxUsers > 0) {
+                statusBox.className = 'limiter-status limiter-status-active';
+                statusBox.innerHTML = `<i class="fas fa-check-circle"></i> User Limit is <strong>ACTIVE</strong>. Maximum ${maxUsers} users allowed on the platform.`;
+                userLimitDisplay.textContent = maxUsers;
+                limiterActiveStatus.innerHTML = '<span class="status-badge status-limiter-active">ACTIVE</span>';
+                const remaining = maxUsers - currentCount;
+                remainingSlotsSpan.innerHTML = remaining > 0 ? remaining : '0 (LIMIT REACHED)';
+                if (remaining <= 0) remainingSlotsSpan.style.color = 'var(--admin-red)';
+                else remainingSlotsSpan.style.color = 'var(--yellow)';
+            } else {
+                statusBox.className = 'limiter-status limiter-status-inactive';
+                statusBox.innerHTML = `<i class="fas fa-ban"></i> User Limit is currently <strong>INACTIVE</strong>. Unlimited users allowed.`;
+                userLimitDisplay.textContent = 'Not Set';
+                limiterActiveStatus.innerHTML = '<span class="status-badge status-limiter-inactive">INACTIVE</span>';
+                remainingSlotsSpan.innerHTML = 'Unlimited';
+                remainingSlotsSpan.style.color = 'var(--yellow)';
+            }
+            document.getElementById('currentUserCount').textContent = currentCount;
+        }
+
+        function applyUserLimit() {
+            const selectedLimit = parseInt(document.getElementById('limitSelect').value);
+            if (selectedLimit === 0) {
+                userLimitActive = false;
+                maxUsers = null;
+                alert('User Limit removed. Unlimited users allowed.');
+            } else {
+                if (users.length > selectedLimit) {
+                    alert(`Cannot set limit to ${selectedLimit} because there are already ${users.length} users.`);
+                    return;
+                }
+                userLimitActive = true;
+                maxUsers = selectedLimit;
+                alert(`User Limit Applied! Maximum ${maxUsers} users allowed. Current: ${users.length}`);
+            }
+            saveUserLimitState();
+            updateUserLimitUI();
+        }
+
+        function removeUserLimit() {
+            userLimitActive = false;
+            maxUsers = null;
+            saveUserLimitState();
+            updateUserLimitUI();
+            alert('User Limit Removed! Unlimited users now allowed.');
+        }
+
+        function checkUserLimit() {
+            if (!userLimitActive) return true;
+            if (maxUsers === null || maxUsers === 0) return true;
+            return users.length < maxUsers;
+        }
+
+        // Validation Functions
+        function validateNationalID(id) {
+            return id && id.trim().length > 0;
+        }
+
+        function validatePhoneNumber(phone) {
+            const phoneRegex = /^[17]\d{8}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Generate random 6-digit code
+        function generateVerificationCode() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Show email confirmation modal
+        function showEmailConfirmation(email, userData) {
+            pendingUser = userData;
+            verificationCode = generateVerificationCode();
+            document.getElementById('confirm-email').textContent = email;
+            document.querySelectorAll('.code-digit').forEach((input, index) => {
+                input.value = '';
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && index < 5) {
+                        document.querySelector(`.code-digit[data-index="${index + 1}"]`).focus();
+                    }
+                });
+            });
+            confirmModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            console.log(`Verification code for ${email}: ${verificationCode}`);
+            alert(`Demo: Verification code sent to ${email}\nCode: ${verificationCode}\n(In production, this would be sent via email)`);
+        }
+
+        // Verify code
+        verifyCodeBtn.addEventListener('click', () => {
+            let enteredCode = '';
+            document.querySelectorAll('.code-digit').forEach(input => {
+                enteredCode += input.value;
+            });
+            if (enteredCode === verificationCode && pendingUser) {
+                users.push(pendingUser);
+                localStorage.setItem('blsols_users', JSON.stringify(users));
+                confirmModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                alert('Email verified successfully! Your account has been created.');
+                currentUser = pendingUser;
+                updateAuthUI();
+                showPage('dashboard');
+                userGreeting.textContent = `Welcome, ${pendingUser.firstName}!`;
+                updateDateTime();
+                loadUserData();
+                refreshAdminStats();
+                updateUserLimitUI();
+                pendingUser = null;
+            } else {
+                alert('Invalid verification code. Please try again.');
+            }
+        });
+
+        resendCodeBtn.addEventListener('click', () => {
+            verificationCode = generateVerificationCode();
+            alert(`New verification code sent to ${pendingUser?.email}\nCode: ${verificationCode}`);
+        });
+
+        closeConfirmBtn.addEventListener('click', closeConfirmModal);
+
+        // Real-time validation
+        nationalIdInput.addEventListener('input', function() {
+            const id = this.value;
+            if (id.length > 0) {
+                if (validateNationalID(id)) {
+                    nationalIdError.classList.remove('show');
+                    nationalIdSuccess.classList.add('show');
+                    this.classList.remove('error');
+                } else {
+                    nationalIdError.classList.add('show');
+                    nationalIdSuccess.classList.remove('show');
+                    this.classList.add('error');
+                }
+            } else {
+                nationalIdError.classList.remove('show');
+                nationalIdSuccess.classList.remove('show');
+                this.classList.remove('error');
+            }
+        });
+
+        phoneNumberInput.addEventListener('input', function() {
+            const phone = this.value;
+            if (phone.length === 9) {
+                if (validatePhoneNumber(phone)) {
+                    phoneError.classList.remove('show');
+                    phoneSuccess.classList.add('show');
+                    this.classList.remove('error');
+                } else {
+                    phoneError.classList.add('show');
+                    phoneSuccess.classList.remove('show');
+                    this.classList.add('error');
+                }
+            } else {
+                phoneError.classList.remove('show');
+                phoneSuccess.classList.remove('show');
+                this.classList.remove('error');
+            }
+        });
+
+        function validatePasswords() {
+            const password = passwordInput.value;
+            const confirm = confirmPasswordInput.value;
+            if (confirm.length > 0) {
+                if (password === confirm) {
+                    passwordError.classList.remove('show');
+                    passwordSuccess.classList.add('show');
+                    return true;
+                } else {
+                    passwordError.classList.add('show');
+                    passwordSuccess.classList.remove('show');
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        passwordInput.addEventListener('input', validatePasswords);
+        confirmPasswordInput.addEventListener('input', validatePasswords);
+
+        // Data Storage
+        let currentUser = null;
+        let users = JSON.parse(localStorage.getItem('blsols_users') || '[]');
+        let participations = JSON.parse(localStorage.getItem('blsols_participations') || '[]');
+        let claims = JSON.parse(localStorage.getItem('blsols_claims') || '[]');
+        let settings = JSON.parse(localStorage.getItem('blsols_settings') || '{"fee24":50,"feeOther":20,"referralBonus":300}');
+
+        // Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            window.scrollTo(0, 0);
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                showPage(pageId);
+                if (pageId === 'admin') {
+                    refreshAdminStats();
+                    loadUserLimitState();
+                }
+            });
+        });
+
+        function updateAuthUI() {
+            if (currentUser) {
+                authButtons.style.display = 'none';
+                logoutContainer.style.display = 'block';
+                if (currentUser.status === 'suspended') {
+                    userStatusBadge.innerHTML = '<span class="status-badge status-suspended">SUSPENDED</span>';
+                } else if (currentUser.status === 'deactivated') {
+                    userStatusBadge.innerHTML = '<span class="status-badge status-deactivated">DEACTIVATED</span>';
+                } else {
+                    userStatusBadge.innerHTML = '<span class="status-badge status-active">ACTIVE</span>';
+                }
+                if (currentUser.verified) {
+                    userVerificationBadge.innerHTML = '<span class="status-badge status-verified"><i class="fas fa-check-circle"></i> VERIFIED</span>';
+                } else {
+                    userVerificationBadge.style.display = 'none';
+                }
+            } else {
+                authButtons.style.display = 'flex';
+                logoutContainer.style.display = 'none';
+                userStatusBadge.style.display = 'none';
+                userVerificationBadge.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            updateAuthUI();
+            showPage('home');
+            alert('You have been logged out successfully.');
+        }
+
+        logoutBtn.addEventListener('click', logout);
+
+        // Show Login Modal
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        loginBtn.addEventListener('click', showLoginModal);
+        heroRegisterBtn.addEventListener('click', () => showPage('register'));
+        registerBtn.addEventListener('click', () => showPage('register'));
+        registerFromLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeLoginModal();
+            showPage('register');
+        });
+        loginFromRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginModal();
+        });
+
+        // Password Login
+        passwordLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const phone = document.getElementById('login-phone').value;
+            const password = document.getElementById('login-password').value;
+            const formattedPhone = '+254' + phone;
+            const user = users.find(u => u.phoneNumber === formattedPhone && u.password === password);
+            if (user) {
+                closeLoginModal();
+                currentUser = user;
+                updateAuthUI();
+                showPage('dashboard');
+                userGreeting.textContent = `Welcome back, ${user.firstName}!`;
+                updateDateTime();
+                loadUserData();
+            } else {
+                alert('Invalid credentials. Please check your phone number and password.');
+            }
+        });
+
+        // Google Sign-In Simulation
+        googleLoginBtn.addEventListener('click', () => {
+            const email = prompt('Enter your Google email address:');
+            if (email && validateEmail(email)) {
+                const user = users.find(u => u.email === email);
+                if (user) {
+                    closeLoginModal();
+                    currentUser = user;
+                    updateAuthUI();
+                    showPage('dashboard');
+                    userGreeting.textContent = `Welcome back, ${user.firstName}!`;
+                    updateDateTime();
+                    loadUserData();
+                } else {
+                    alert('No account found with this email. Please register first.');
+                }
+            } else if (email) {
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        // Close login modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                closeLoginModal();
+            }
+            if (e.target === confirmModal) {
+                closeConfirmModal();
+            }
+            if (e.target === participateModal) {
+                closeParticipateModal();
+            }
+            if (e.target === stkModal) {
+                closeStkModal();
+            }
+        });
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (loginModal.style.display === 'flex') closeLoginModal();
+                if (confirmModal.style.display === 'flex') closeConfirmModal();
+                if (participateModal.style.display === 'flex') closeParticipateModal();
+                if (stkModal.style.display === 'flex') closeStkModal();
+                if (chatbotContainer.style.display === 'flex') closeChatbot();
+            }
+        });
+
+        // Terms link
+        termsLink.addEventListener('click', (e) => { e.preventDefault(); alert(`Terms & Conditions:\n⦁ Currency used is ksh.\n⦁ Minimum amount is ksh1000/-\n⦁ Maximum amount is ksh20,000/-\n⦁ Service fee is 20% for 5/10 days, 50% for 24HRS\n⦁ Recommitment fee is 20% (50% for 24HRS) when claiming\n⦁ Your M-Pesa number is your account number`); });
+
+        // Registration Form
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!checkUserLimit()) {
+                alert(`User limit of ${maxUsers} has been reached. No new registrations allowed.`);
+                return;
+            }
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('reg-email').value;
+            const nationalId = document.getElementById('nationalId').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const termsAgreed = termsCheckbox.checked;
+            const verifiedAgreed = verificationCheckbox.checked;
+            
+            let isValid = true;
+            
+            if (!firstName.trim()) { alert('Please enter your first name'); isValid = false; }
+            else if (!lastName.trim()) { alert('Please enter your last name'); isValid = false; }
+            else if (!validateEmail(email)) { alert('Please enter a valid email address'); isValid = false; }
+            else if (!validateNationalID(nationalId)) { alert('Please enter a valid National ID'); isValid = false; }
+            else if (!validatePhoneNumber(phoneNumber)) { alert('Please enter a valid M-Pesa number (9 digits starting with 7 or 1)'); isValid = false; }
+            else if (password.length < 8) { alert('Password must be at least 8 characters'); isValid = false; }
+            else if (password !== confirmPassword) { alert('Passwords do not match'); isValid = false; }
+            else if (!termsAgreed) { alert('You must agree to the Terms & Conditions'); isValid = false; }
+            else if (!verifiedAgreed) { alert('You must confirm that your details are correct'); isValid = false; }
+            
+            const existingUser = users.find(u => u.phoneNumber === '+254' + phoneNumber);
+            if (existingUser && isValid) {
+                alert('This M-Pesa number is already registered.');
+                isValid = false;
+            }
+            
+            const existingEmail = users.find(u => u.email === email);
+            if (existingEmail && isValid) {
+                alert('This email is already registered.');
+                isValid = false;
+            }
+            
+            const existingId = users.find(u => u.nationalId === nationalId);
+            if (existingId && isValid) {
+                alert('This National ID is already registered.');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                const newUser = { 
+                    id: Date.now(), 
+                    firstName, 
+                    lastName, 
+                    email,
+                    nationalId, 
+                    phoneNumber: '+254' + phoneNumber, 
+                    password, 
+                    registeredDate: new Date().toISOString(), 
+                    status: 'active', 
+                    verified: false,
+                    emailVerified: false,
+                    referralCode: 'REF' + Math.random().toString(36).substring(2, 8).toUpperCase(), 
+                    referralEarnings: 0 
+                };
+                showEmailConfirmation(email, newUser);
+                registerForm.reset();
+                nationalIdSuccess.classList.remove('show');
+                phoneSuccess.classList.remove('show');
+                passwordSuccess.classList.remove('show');
+                emailSuccess.classList.remove('show');
+            }
+        });
+
+        contactForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Thank you for your message! We will get back to you soon.'); contactForm.reset(); });
+
+        // Dashboard Actions
+        participateBtn.addEventListener('click', () => { 
+            if (!currentUser) { showLoginModal(); return; }
+            if (currentUser.status !== 'active') { alert('Your account is not active.'); return; }
+            participateModal.style.display = 'flex'; 
+            document.body.style.overflow = 'hidden';
+        });
+        
+        claimBtn.addEventListener('click', () => { 
+            if (!currentUser) { showLoginModal(); return; }
+            if (currentUser.status !== 'active') { alert('Your account is not active.'); return; }
+            const userParticipations = participations.filter(p => p.userId === currentUser.id && p.status === 'active');
+            if (userParticipations.length === 0) { alert('No active participations to claim'); return; }
+            
+            let totalRecommitmentFee = 0;
+            let totalEarnings = 0;
+            userParticipations.forEach(p => {
+                totalEarnings += p.amount;
+                const is24hrs = p.package === '24HRS';
+                const recommitRate = is24hrs ? 0.5 : 0.2;
+                totalRecommitmentFee += p.amount * recommitRate;
+            });
+            const netAmount = totalEarnings - totalRecommitmentFee;
+            
+            alert(`Claim Summary:\nTotal Earnings: Ksh ${totalEarnings.toLocaleString()}\nRecommitment Fee: Ksh ${totalRecommitmentFee.toLocaleString()}\nNet Amount: Ksh ${netAmount.toLocaleString()}`);
+            userParticipations.forEach(p => { p.status = 'completed'; p.claimedDate = new Date().toISOString(); });
+            localStorage.setItem('blsols_participations', JSON.stringify(participations));
+            alert('Claim processed successfully!');
+            loadUserData();
+            refreshAdminStats();
+        });
+        
+        statusBtn.addEventListener('click', () => { 
+            if (!currentUser) { showLoginModal(); return; }
+            const activeCount = participations.filter(p => p.userId === currentUser?.id && p.status === 'active').length;
+            alert(`Account Status:\nName: ${currentUser.firstName} ${currentUser.lastName}\nEmail: ${currentUser.email}\nAccount: ${currentUser.phoneNumber}\nNational ID: ${currentUser.nationalId}\nStatus: ${currentUser.status.toUpperCase()}\nVerified: ${currentUser.verified ? 'YES' : 'NO'}\nActive Participations: ${activeCount}`);
+        });
+        
+        inviteBtn.addEventListener('click', () => { if (currentUser) alert(`Invite a Friend!\nShare your code: ${currentUser.referralCode}\nEarn Ksh ${settings.referralBonus} per referral!`); else showLoginModal(); });
+        closeBtn.addEventListener('click', () => showPage('home'));
+        forgotPasswordLink.addEventListener('click', (e) => { e.preventDefault(); alert('Contact support: 0759184375 or 0787959119'); });
+        forgotPasswordModalLink.addEventListener('click', (e) => { e.preventDefault(); closeLoginModal(); alert('Contact support: 0759184375 or 0787959119'); });
+
+        // Package Selection & Calculation
+        let selectedPackage = '5';
+        packageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                packageOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedPackage = option.getAttribute('data-duration');
+                updateCalculation();
+            });
+        });
+
+        function updateCalculation() {
+            const amount = parseInt(amountInput.value) || 0;
+            const feeRate = selectedPackage === '24' ? (settings.fee24 / 100) : (settings.feeOther / 100);
+            const fee = amount * feeRate;
+            wishedAmount.textContent = `Ksh ${amount.toLocaleString()}`;
+            serviceFeePercent.textContent = `${feeRate * 100}`;
+            serviceFeeSpan.textContent = `Ksh ${fee.toLocaleString()}`;
+            yourInterest.textContent = `Ksh ${amount.toLocaleString()}`;
+            totalToPay.textContent = `Ksh ${(amount + fee).toLocaleString()}`;
+        }
+        amountInput.addEventListener('input', updateCalculation);
+
+        function showSTKPush(amount, phoneNumber, callback) {
+            stkModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('stk-amount').textContent = `Ksh ${amount.toLocaleString()}`;
+            document.getElementById('stk-phone').textContent = phoneNumber;
+            const stkMessage = document.getElementById('stk-message');
+            const stkTimerElem = document.getElementById('stk-timer');
+            stkTimeLeft = 60;
+            stkMessage.innerHTML = '<div class="stk-loader"></div>Waiting for PIN input...';
+            
+            if (stkTimer) clearInterval(stkTimer);
+            stkTimer = setInterval(() => {
+                stkTimeLeft--;
+                stkTimerElem.textContent = `Time: ${stkTimeLeft}s`;
+                if (stkTimeLeft <= 0) {
+                    clearInterval(stkTimer);
+                    stkMessage.innerHTML = '<i class="fas fa-times-circle" style="font-size: 2rem; color: var(--admin-red);"></i><br>Transaction timeout.';
+                    setTimeout(() => { closeStkModal(); if(callback) callback(false); }, 3000);
+                }
+            }, 1000);
+            
+            setTimeout(() => {
+                if (stkTimeLeft > 0 && stkModal.style.display === 'flex') {
+                    clearInterval(stkTimer);
+                    stkMessage.innerHTML = '<i class="fas fa-check-circle" style="font-size: 2rem; color: var(--mpesa-green);"></i><br>Payment successful!';
+                    setTimeout(() => {
+                        closeStkModal();
+                        if(callback) callback(true);
+                    }, 2000);
+                }
+            }, 3000);
+        }
+
+        submitParticipation.addEventListener('click', () => {
+            if (!currentUser) { showLoginModal(); return; }
+            const selectedPackageElem = document.querySelector('.package-option.selected');
+            const amount = parseInt(amountInput.value) || 0;
+            const termsChecked = document.getElementById('participation-terms').checked;
+            
+            if (!selectedPackageElem) { alert('Select a package'); return; }
+            if (amount < 1000 || amount > 20000 || amount % 1000 !== 0) { alert('Amount must be Ksh 1,000-20,000 in multiples of 1,000'); return; }
+            if (!termsChecked) { alert('Accept Terms & Conditions'); return; }
+            if (currentUser.status !== 'active') { alert('Account not active'); return; }
+            
+            const feeRate = selectedPackage === '24' ? (settings.fee24 / 100) : (settings.feeOther / 100);
+            const fee = amount * feeRate;
+            const totalAmount = amount + fee;
+            
+            closeParticipateModal();
+            
+            showSTKPush(totalAmount, currentUser.phoneNumber, (success) => {
+                if (success) {
+                    const newParticipation = {
+                        id: Date.now(), userId: currentUser.id, userName: `${currentUser.firstName} ${currentUser.lastName}`,
+                        package: selectedPackage === '24' ? '24HRS' : (selectedPackage === '5' ? '5 Days' : '10 Days'),
+                        amount: amount, serviceFee: fee, totalPaid: totalAmount, status: 'active',
+                        startDate: new Date().toISOString(),
+                        maturityDate: new Date(Date.now() + (selectedPackage === '24' ? 86400000 : (selectedPackage === '5' ? 432000000 : 864000000))).toISOString()
+                    };
+                    participations.push(newParticipation);
+                    localStorage.setItem('blsols_participations', JSON.stringify(participations));
+                    alert(`Payment successful! ${newParticipation.package} package activated.`);
+                    loadUserData();
+                    refreshAdminStats();
+                } else {
+                    alert('Payment failed. Please try again.');
+                }
+            });
+        });
+
+        cancelParticipation.addEventListener('click', closeParticipateModal);
+        cancelStk.addEventListener('click', closeStkModal);
+
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                participateModal.style.display = 'none';
+                stkModal.style.display = 'none';
+                chatbotContainer.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal') || e.target.classList.contains('stk-modal')) {
+                e.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                if (stkTimer) clearInterval(stkTimer);
+            }
+        });
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strengthText = document.querySelector('.password-strength');
+            const strengthLevel = document.querySelector('.strength-level');
+            let strength = 0;
+            if (password.length >= 8) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+            strengthLevel.style.width = `${strength}%`;
+            if (strength < 50) { strengthText.textContent = 'Weak'; strengthText.style.color = '#ff6f4f'; strengthLevel.style.backgroundColor = '#ff6f4f'; }
+            else if (strength < 75) { strengthText.textContent = 'Medium'; strengthText.style.color = '#ffa726'; strengthLevel.style.backgroundColor = '#ffa726'; }
+            else { strengthText.textContent = 'Strong'; strengthText.style.color = '#4caf50'; strengthLevel.style.backgroundColor = '#4caf50'; }
+            validatePasswords();
+        });
+
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            currentDateTime.textContent = now.toLocaleDateString('en-KE', options);
+        }
+
+        function loadUserData() {
+            if (!currentUser) return;
+            const userParticipations = participations.filter(p => p.userId === currentUser.id);
+            const historyDiv = document.getElementById('participation-history');
+            if (userParticipations.length === 0) historyDiv.innerHTML = '<p>No participation history yet.</p>';
+            else historyDiv.innerHTML = userParticipations.map(p => `<div style="background-color: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px; margin-bottom: 10px;"><strong>${p.package}</strong> - Ksh ${p.amount.toLocaleString()} <span class="status-badge status-${p.status}">${p.status.toUpperCase()}</span><br><small>Started: ${new Date(p.startDate).toLocaleDateString()}</small></div>`).join('');
+            
+            const totalParticipated = userParticipations.reduce((sum, p) => sum + p.amount, 0);
+            const activePackages = userParticipations.filter(p => p.status === 'active').length;
+            document.getElementById('account-summary').innerHTML = `<div><strong>Email:</strong> ${currentUser.email}</div><div><strong>Account:</strong> ${currentUser.phoneNumber}</div><div><strong>National ID:</strong> ${currentUser.nationalId}</div><div><strong>Total Participated:</strong> Ksh ${totalParticipated.toLocaleString()}</div><div><strong>Active Packages:</strong> ${activePackages}</div>`;
+            
+            const transactionsBody = document.getElementById('user-transactions-body');
+            if (userParticipations.length === 0) transactionsBody.innerHTML = '<tr><td colspan="4">No transactions yet<\/td><\/tr>';
+            else transactionsBody.innerHTML = userParticipations.slice(0, 10).map(t => `<tr><td>${new Date(t.startDate).toLocaleDateString()}<\/td><td>${t.package} Participation<\/td><td>Ksh ${t.amount.toLocaleString()}<\/td><td class="status-${t.status}">${t.status.toUpperCase()}<\/td><\/tr>`).join('');
+        }
+
+        function refreshAdminStats() {
+            const activeUsers = users.filter(u => u.status === 'active').length;
+            const suspendedUsers = users.filter(u => u.status === 'suspended').length;
+            const verifiedUsers = users.filter(u => u.verified === true).length;
+            document.getElementById('admin-total-users').textContent = users.length;
+            document.getElementById('admin-active-users').textContent = activeUsers;
+            document.getElementById('admin-suspended-users').textContent = suspendedUsers;
+            document.getElementById('admin-verified-users').textContent = verifiedUsers;
+            document.getElementById('admin-total-participations').textContent = participations.length;
+            const totalVolume = participations.reduce((sum, p) => sum + p.totalPaid, 0);
+            document.getElementById('admin-total-volume').textContent = `Ksh ${totalVolume.toLocaleString()}`;
+            
+            const usersBody = document.getElementById('admin-users-body');
+            if (users.length === 0) usersBody.innerHTML = '<tr><td colspan="8">No users yet<\/td><\/tr>';
+            else usersBody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.id}<\/td>
+                    <td>${user.firstName} ${user.lastName}<\/td>
+                    <td>${user.email || 'N/A'}<\/td>
+                    <td>${user.phoneNumber}<\/td>
+                    <td>${user.nationalId}<\/td>
+                    <td><span class="status-badge status-${user.status}">${user.status.toUpperCase()}<\/span><\/td>
+                    <td><span class="status-badge ${user.verified ? 'status-verified' : 'status-pending'}">${user.verified ? 'VERIFIED' : 'PENDING'}<\/span><\/td>
+                    <td class="admin-actions">
+                        ${user.status !== 'active' ? `<button class="btn btn-success small-btn" onclick="activateUser(${user.id})">Activate</button>` : `<button class="btn btn-warning small-btn" onclick="suspendUser(${user.id})">Suspend</button>`}
+                        <button class="btn btn-danger small-btn" onclick="deactivateUser(${user.id})">Deactivate</button>
+                        <button class="btn btn-admin small-btn" onclick="deleteUserPermanently(${user.id})">Delete</button>
+                    <\/td>
+                <\/tr>
+            `).join('');
+            
+            updateUserLimitUI();
+        }
+        
+        window.refreshAdminStats = refreshAdminStats;
+        
+        window.activateUser = function(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user && user.status !== 'active') {
+                user.status = 'active';
+                localStorage.setItem('blsols_users', JSON.stringify(users));
+                refreshAdminStats();
+                alert(`${user.firstName} activated.`);
+            }
+        };
+        
+        window.suspendUser = function(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user && user.status === 'active') {
+                user.status = 'suspended';
+                localStorage.setItem('blsols_users', JSON.stringify(users));
+                refreshAdminStats();
+                if (currentUser && currentUser.id === userId) logout();
+                alert(`${user.firstName} suspended.`);
+            }
+        };
+        
+        window.deactivateUser = function(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user && user.status !== 'deactivated') {
+                user.status = 'deactivated';
+                localStorage.setItem('blsols_users', JSON.stringify(users));
+                refreshAdminStats();
+                if (currentUser && currentUser.id === userId) logout();
+                alert(`${user.firstName} deactivated.`);
+            }
+        };
+        
+        window.deleteUserPermanently = function(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user && confirm(`PERMANENTLY DELETE ${user.firstName}? Type "DELETE"`)) {
+                if (prompt('Type "DELETE":') === 'DELETE') {
+                    users = users.filter(u => u.id !== userId);
+                    participations = participations.filter(p => p.userId !== userId);
+                    claims = claims.filter(c => c.userId !== userId);
+                    localStorage.setItem('blsols_users', JSON.stringify(users));
+                    localStorage.setItem('blsols_participations', JSON.stringify(participations));
+                    localStorage.setItem('blsols_claims', JSON.stringify(claims));
+                    refreshAdminStats();
+                    if (currentUser && currentUser.id === userId) logout();
+                    alert(`${user.firstName} permanently deleted.`);
+                }
+            }
+        };
+        
+        function exportAllData() { 
+            const allData = { users, participations, claims, settings };
+            const blob = new Blob([JSON.stringify(allData, null, 2)], {type: 'application/json'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `blsols_export_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            alert('Data exported!');
+        }
+        window.exportAllData = exportAllData;
+        
+        function clearAllTestData() { 
+            if (confirm('Delete ALL data? Type "DELETE"')) {
+                if (prompt('Type "DELETE":') === 'DELETE') {
+                    localStorage.clear();
+                    users = []; participations = []; claims = []; currentUser = null;
+                    refreshAdminStats();
+                    alert('All data cleared!');
+                    showPage('home');
+                }
+            }
+        }
+        window.clearAllTestData = clearAllTestData;
+        
+        function addSampleData() { 
+            if (userLimitActive && maxUsers > 0 && users.length >= maxUsers) {
+                alert(`Cannot add sample. User limit of ${maxUsers} reached.`);
+                return;
+            }
+            const sampleUser = { id: Date.now(), firstName: 'Sample', lastName: 'User', email: 'sample@blsols.com', nationalId: 'SAMPLE123', phoneNumber: '+254712345678', password: 'sample123', registeredDate: new Date().toISOString(), status: 'active', verified: true, emailVerified: true, referralCode: 'SAMPLE123', referralEarnings: 0 };
+            users.push(sampleUser);
+            localStorage.setItem('blsols_users', JSON.stringify(users));
+            refreshAdminStats();
+            alert('Sample data added!');
+        }
+        window.addSampleData = addSampleData;
+        
+        function saveSystemSettings() { 
+            settings.fee24 = parseInt(document.getElementById('admin-fee-24').value);
+            settings.feeOther = parseInt(document.getElementById('admin-fee-other').value);
+            settings.referralBonus = parseInt(document.getElementById('admin-referral-bonus').value);
+            localStorage.setItem('blsols_settings', JSON.stringify(settings));
+            alert('Settings saved!');
+        }
+        window.saveSystemSettings = saveSystemSettings;
+
+        // Chatbot
+        chatbotIcon.addEventListener('click', () => { 
+            chatbotContainer.style.display = 'flex'; 
+            document.body.style.overflow = 'hidden';
+        });
+        sendMessage.addEventListener('click', sendChatMessage);
+        chatbotInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendChatMessage(); });
+        function sendChatMessage() {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                const userMessage = document.createElement('div'); userMessage.classList.add('message', 'user-message'); userMessage.textContent = message;
+                chatbotMessages.appendChild(userMessage); chatbotInput.value = ''; chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                setTimeout(() => {
+                    const botResponse = getBotResponse(message);
+                    const botMessage = document.createElement('div'); botMessage.classList.add('message', 'bot-message'); botMessage.textContent = botResponse;
+                    chatbotMessages.appendChild(botMessage); chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+        function getBotResponse(message) {
+            const lower = message.toLowerCase();
+            if (lower.includes('mpesa')) return "Paybill: 522533, Account: 8059564. You'll receive an STK Push on your phone.";
+            if (lower.includes('claim')) return "Go to Claim section. Recommitment fee: 20% (5/10 days) or 50% (24HRS).";
+            if (lower.includes('package')) return "24HRS (50% fee), 5 DAYS (20% fee), 10 DAYS (20% fee). Each gives 100% returns!";
+            if (lower.includes('contact')) return "Call/WhatsApp: 0759184375 or 0787959119";
+            if (lower.includes('login')) return "Login using your phone number + password or Google Sign-In.";
+            return "I'm here to help with M-Pesa, packages, claims, login, and support!";
+        }
+
+        document.getElementById('activateLimiterBtn').addEventListener('click', applyUserLimit);
+        document.getElementById('deactivateLimiterBtn').addEventListener('click', removeUserLimit);
+
+        // Initialize
+        showPage('home');
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+        updateAuthUI();
+        loadUserLimitState();
+    </script>
+</body>
+</html>
