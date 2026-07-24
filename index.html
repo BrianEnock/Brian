@@ -324,127 +324,6 @@
             text-decoration: underline;
         }
 
-        /* Email Confirmation Modal */
-        .confirm-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 2100;
-            justify-content: center;
-            align-items: flex-start;
-            animation: modalFadeIn 0.3s ease-out;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .confirm-container {
-            background: linear-gradient(145deg, var(--dark-popup), var(--darker-popup));
-            border-radius: 20px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 400px;
-            margin: auto;
-            text-align: center;
-            animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--border-orange);
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .confirm-container::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .confirm-container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .confirm-container::-webkit-scrollbar-thumb {
-            background: var(--yellow);
-            border-radius: 10px;
-        }
-
-        .confirm-close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--white);
-            transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .confirm-close-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-            color: var(--yellow);
-        }
-
-        .confirm-icon {
-            font-size: 4rem;
-            color: var(--mpesa-green);
-            margin-bottom: 1rem;
-        }
-
-        .confirm-title {
-            font-size: 1.5rem;
-            color: var(--yellow);
-            margin-bottom: 1rem;
-        }
-
-        .confirm-message {
-            margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .code-input {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .code-input input {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 1.5rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            color: var(--white);
-        }
-
-        .code-input input:focus {
-            outline: none;
-            border-color: var(--yellow);
-        }
-
-        .resend-code {
-            background: none;
-            border: none;
-            color: var(--yellow);
-            cursor: pointer;
-            margin-top: 1rem;
-            text-decoration: underline;
-        }
-
         /* Page Sections */
         .page {
             display: none !important;
@@ -1865,11 +1744,6 @@
                 padding: 1.5rem;
                 margin: 10px;
             }
-            .code-input input {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
             .registration-card {
                 max-height: 90vh;
                 padding: 25px;
@@ -1913,11 +1787,6 @@
             .modal-content {
                 max-height: 85vh;
                 padding: 1rem;
-            }
-            .code-input input {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
             }
             .form-header {
                 flex-wrap: wrap;
@@ -1990,29 +1859,6 @@
             <div style="text-align: center; margin-top: 0.5rem;">
                 <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Don't have an account? <a href="#" id="register-from-login" style="color: var(--yellow);">Register here</a></p>
             </div>
-        </div>
-    </div>
-    
-    <!-- Email Confirmation Modal -->
-    <div id="confirm-modal" class="confirm-modal">
-        <div class="confirm-container">
-            <button class="confirm-close-btn" id="confirmCloseBtn">&times;</button>
-            <div class="confirm-icon">
-                <i class="fas fa-envelope"></i>
-            </div>
-            <h3 class="confirm-title">Verify Your Email</h3>
-            <p class="confirm-message">We've sent a verification code to <strong id="confirm-email">your email</strong>. Please enter it below to complete your registration.</p>
-            <div class="code-input">
-                <input type="text" maxlength="1" class="code-digit" data-index="0">
-                <input type="text" maxlength="1" class="code-digit" data-index="1">
-                <input type="text" maxlength="1" class="code-digit" data-index="2">
-                <input type="text" maxlength="1" class="code-digit" data-index="3">
-                <input type="text" maxlength="1" class="code-digit" data-index="4">
-                <input type="text" maxlength="1" class="code-digit" data-index="5">
-            </div>
-            <button class="btn btn-primary" id="verify-code-btn" style="width: 100%;">Verify Account</button>
-            <button class="resend-code" id="resend-code-btn">Resend Code</button>
-            <button class="btn btn-secondary" id="close-confirm-btn" style="margin-top: 1rem; width: 100%;">Cancel</button>
         </div>
     </div>
 
@@ -2124,7 +1970,7 @@
         </div>
     </section>
 
-    <!-- Registration Page -->
+    <!-- Registration Page - No Email Verification -->
     <section id="register" class="page">
         <div class="container">
             <div class="registration-card">
@@ -2137,7 +1983,6 @@
                         <div class="form-group"><label for="firstName">First Name <span class="required">*</span></label><input type="text" id="firstName" class="form-control" placeholder="Enter first name" required></div>
                         <div class="form-group"><label for="lastName">Last Name <span class="required">*</span></label><input type="text" id="lastName" class="form-control" placeholder="Enter last name" required></div>
                     </div>
-                    <div class="form-group"><label for="email">Email Address <span class="required">*</span></label><input type="email" id="reg-email" class="form-control" placeholder="Enter email address" required><div id="emailError" class="error-message">Please enter a valid email address</div><div id="emailSuccess" class="success-message">✓ Email verified</div></div>
                     <div class="form-group"><label for="nationalId">National ID Number <span class="required">*</span></label><input type="text" id="nationalId" class="form-control" placeholder="Enter National ID" required><div id="nationalIdError" class="error-message">Please enter a valid National ID</div><div id="nationalIdSuccess" class="success-message">✓ National ID verified</div></div>
                     <div class="form-group"><label for="phoneNumber">M-Pesa Number (Account Number) <span class="required">*</span></label><div class="phone-input"><div class="country-code">+254</div><input type="tel" id="phoneNumber" class="form-control phone-number" placeholder="712345678" maxlength="9" required></div><div id="phoneError" class="error-message">Invalid phone number. Must be 9 digits starting with 7 or 1.</div><div id="phoneSuccess" class="success-message">✓ Phone number verified</div></div>
                     <div class="form-group"><label for="password">Create Password <span class="required">*</span></label><div class="password-container"><input type="password" id="password" class="form-control" placeholder="Create password (min 8 characters)" required><button type="button" class="toggle-password" id="togglePassword"><i class="fas fa-eye-slash"></i></button></div><div class="password-strength">Weak</div><div class="strength-bar"><div class="strength-level"></div></div></div>
@@ -2230,7 +2075,7 @@
             
             <div class="transaction-card"><h3>System Settings</h3><div class="form-row"><div class="form-group"><label>Service Fee (24HRS):</label><input type="number" id="admin-fee-24" class="form-control" value="50" step="5"></div><div class="form-group"><label>Service Fee (5/10 Days):</label><input type="number" id="admin-fee-other" class="form-control" value="20" step="5"></div><div class="form-group"><label>Referral Bonus (Ksh):</label><input type="number" id="admin-referral-bonus" class="form-control" value="300" step="50"></div></div><button class="btn btn-primary" onclick="saveSystemSettings()" style="margin-top: 1rem;">Save Settings</button></div>
             
-            <div class="transaction-card"><h3><i class="fas fa-users"></i> User Management</h3><p style="margin-bottom: 1rem;">Actions: <span style="color: var(--admin-green);">● Activate</span> | <span style="color: var(--admin-orange);">● Suspend</span> | <span style="color: var(--admin-red);">● Deactivate</span> | <span style="color: #e74c3c;">● Delete</span></p><div style="overflow-x: auto; width: 100%;"><table class="admin-table" id="admin-users-table" style="min-width: 700px;"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone (Account)</th><th>National ID</th><th>Status</th><th>Verified</th><th>Actions</th></tr></thead><tbody id="admin-users-body"><tr><td colspan="8">No users registered yet</td></tr></tbody></table></div></div>
+            <div class="transaction-card"><h3><i class="fas fa-users"></i> User Management</h3><p style="margin-bottom: 1rem;">Actions: <span style="color: var(--admin-green);">● Activate</span> | <span style="color: var(--admin-orange);">● Suspend</span> | <span style="color: var(--admin-red);">● Deactivate</span> | <span style="color: #e74c3c;">● Delete</span></p><div style="overflow-x: auto; width: 100%;"><table class="admin-table" id="admin-users-table" style="min-width: 700px;"><thead><tr><th>ID</th><th>Name</th><th>Phone (Account)</th><th>National ID</th><th>Status</th><th>Verified</th><th>Actions</th></tr></thead><tbody id="admin-users-body"><tr><td colspan="7">No users registered yet</td></tr></tbody></table></div></div>
             <div class="transaction-card"><h3><i class="fas fa-chart-line"></i> Participations Overview</h3><div style="overflow-x: auto; width: 100%;"><table class="admin-table" id="admin-participations-table" style="min-width: 700px;"><thead><tr><th>User</th><th>Package</th><th>Amount</th><th>Service Fee</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody id="admin-participations-body"><tr><td colspan="7">No participations yet</td></tr></tbody></table></div></div>
         </div>
     </section>
@@ -2348,13 +2193,9 @@
         const phoneSuccess = document.getElementById('phoneSuccess');
         const passwordError = document.getElementById('passwordError');
         const passwordSuccess = document.getElementById('passwordSuccess');
-        const regEmailInput = document.getElementById('reg-email');
-        const emailError = document.getElementById('emailError');
-        const emailSuccess = document.getElementById('emailSuccess');
 
         // Close buttons
         const loginCloseBtn = document.getElementById('loginCloseBtn');
-        const confirmCloseBtn = document.getElementById('confirmCloseBtn');
         const registerCloseBtn = document.getElementById('registerCloseBtn');
         const participateCloseBtn = document.getElementById('participateCloseBtn');
         const stkCloseBtn = document.getElementById('stkCloseBtn');
@@ -2364,12 +2205,6 @@
         function closeLoginModal() {
             document.getElementById('login-modal').style.display = 'none';
             document.body.style.overflow = 'auto';
-        }
-
-        function closeConfirmModal() {
-            document.getElementById('confirm-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            pendingUser = null;
         }
 
         function closeRegisterModal() {
@@ -2395,7 +2230,6 @@
 
         // Event listeners for close buttons
         loginCloseBtn.addEventListener('click', closeLoginModal);
-        confirmCloseBtn.addEventListener('click', closeConfirmModal);
         registerCloseBtn.addEventListener('click', closeRegisterModal);
         participateCloseBtn.addEventListener('click', closeParticipateModal);
         stkCloseBtn.addEventListener('click', closeStkModal);
@@ -2403,40 +2237,12 @@
 
         // Login Modal Elements
         const loginModal = document.getElementById('login-modal');
-        const confirmModal = document.getElementById('confirm-modal');
         const passwordLoginForm = document.getElementById('passwordLoginForm');
-        const verifyCodeBtn = document.getElementById('verify-code-btn');
-        const resendCodeBtn = document.getElementById('resend-code-btn');
-        const closeConfirmBtn = document.getElementById('close-confirm-btn');
         const registerFromLogin = document.getElementById('register-from-login');
         const loginFromRegister = document.getElementById('login-from-register');
 
-        let pendingUser = null;
-        let verificationCode = null;
         let stkTimer = null;
         let stkTimeLeft = 60;
-
-        // Email validation
-        function validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        regEmailInput.addEventListener('input', function() {
-            const email = this.value;
-            if (validateEmail(email)) {
-                emailError.classList.remove('show');
-                emailSuccess.classList.add('show');
-                this.classList.remove('error');
-            } else if (email.length > 0) {
-                emailError.classList.add('show');
-                emailSuccess.classList.remove('show');
-                this.classList.add('error');
-            } else {
-                emailError.classList.remove('show');
-                emailSuccess.classList.remove('show');
-                this.classList.remove('error');
-            }
-        });
 
         function toggleLoginPassword() {
             const pwd = document.getElementById('login-password');
@@ -2540,63 +2346,6 @@
             const phoneRegex = /^[17]\d{8}$/;
             return phoneRegex.test(phone);
         }
-
-        // Generate random 6-digit code
-        function generateVerificationCode() {
-            return Math.floor(100000 + Math.random() * 900000).toString();
-        }
-
-        // Show email confirmation modal
-        function showEmailConfirmation(email, userData) {
-            pendingUser = userData;
-            verificationCode = generateVerificationCode();
-            document.getElementById('confirm-email').textContent = email;
-            document.querySelectorAll('.code-digit').forEach((input, index) => {
-                input.value = '';
-                input.addEventListener('input', (e) => {
-                    if (e.target.value.length === 1 && index < 5) {
-                        document.querySelector(`.code-digit[data-index="${index + 1}"]`).focus();
-                    }
-                });
-            });
-            confirmModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            console.log(`Verification code for ${email}: ${verificationCode}`);
-            alert(`Demo: Verification code sent to ${email}\nCode: ${verificationCode}\n(In production, this would be sent via email)`);
-        }
-
-        // Verify code
-        verifyCodeBtn.addEventListener('click', () => {
-            let enteredCode = '';
-            document.querySelectorAll('.code-digit').forEach(input => {
-                enteredCode += input.value;
-            });
-            if (enteredCode === verificationCode && pendingUser) {
-                users.push(pendingUser);
-                localStorage.setItem('blsols_users', JSON.stringify(users));
-                confirmModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                alert('Email verified successfully! Your account has been created.');
-                currentUser = pendingUser;
-                updateAuthUI();
-                showPage('dashboard');
-                userGreeting.textContent = `Welcome, ${pendingUser.firstName}!`;
-                updateDateTime();
-                loadUserData();
-                refreshAdminStats();
-                updateUserLimitUI();
-                pendingUser = null;
-            } else {
-                alert('Invalid verification code. Please try again.');
-            }
-        });
-
-        resendCodeBtn.addEventListener('click', () => {
-            verificationCode = generateVerificationCode();
-            alert(`New verification code sent to ${pendingUser?.email}\nCode: ${verificationCode}`);
-        });
-
-        closeConfirmBtn.addEventListener('click', closeConfirmModal);
 
         // Real-time validation
         nationalIdInput.addEventListener('input', function() {
@@ -2774,9 +2523,6 @@
             if (e.target === loginModal) {
                 closeLoginModal();
             }
-            if (e.target === confirmModal) {
-                closeConfirmModal();
-            }
             if (e.target === participateModal) {
                 closeParticipateModal();
             }
@@ -2789,7 +2535,6 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 if (loginModal.style.display === 'flex') closeLoginModal();
-                if (confirmModal.style.display === 'flex') closeConfirmModal();
                 if (participateModal.style.display === 'flex') closeParticipateModal();
                 if (stkModal.style.display === 'flex') closeStkModal();
                 if (chatbotContainer.style.display === 'flex') closeChatbot();
@@ -2799,7 +2544,7 @@
         // Terms link
         termsLink.addEventListener('click', (e) => { e.preventDefault(); alert(`Terms & Conditions:\n⦁ Currency used is ksh.\n⦁ Minimum amount is ksh1000/-\n⦁ Maximum amount is ksh20,000/-\n⦁ Service fee is 20% for 5/10 days, 50% for 24HRS\n⦁ Recommitment fee is 20% (50% for 24HRS) when claiming\n⦁ Your M-Pesa number is your account number`); });
 
-        // Registration Form
+        // Registration Form - No Email Verification
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -2810,7 +2555,6 @@
             
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('reg-email').value;
             const nationalId = document.getElementById('nationalId').value;
             const phoneNumber = document.getElementById('phoneNumber').value;
             const password = document.getElementById('password').value;
@@ -2822,7 +2566,6 @@
             
             if (!firstName.trim()) { alert('Please enter your first name'); isValid = false; }
             else if (!lastName.trim()) { alert('Please enter your last name'); isValid = false; }
-            else if (!validateEmail(email)) { alert('Please enter a valid email address'); isValid = false; }
             else if (!validateNationalID(nationalId)) { alert('Please enter a valid National ID'); isValid = false; }
             else if (!validatePhoneNumber(phoneNumber)) { alert('Please enter a valid M-Pesa number (9 digits starting with 7 or 1)'); isValid = false; }
             else if (password.length < 8) { alert('Password must be at least 8 characters'); isValid = false; }
@@ -2833,12 +2576,6 @@
             const existingUser = users.find(u => u.phoneNumber === '+254' + phoneNumber);
             if (existingUser && isValid) {
                 alert('This M-Pesa number is already registered.');
-                isValid = false;
-            }
-            
-            const existingEmail = users.find(u => u.email === email);
-            if (existingEmail && isValid) {
-                alert('This email is already registered.');
                 isValid = false;
             }
             
@@ -2853,23 +2590,32 @@
                     id: Date.now(), 
                     firstName, 
                     lastName, 
-                    email,
                     nationalId, 
                     phoneNumber: '+254' + phoneNumber, 
                     password, 
                     registeredDate: new Date().toISOString(), 
                     status: 'active', 
-                    verified: false,
-                    emailVerified: false,
+                    verified: true,
                     referralCode: 'REF' + Math.random().toString(36).substring(2, 8).toUpperCase(), 
                     referralEarnings: 0 
                 };
-                showEmailConfirmation(email, newUser);
+                users.push(newUser);
+                localStorage.setItem('blsols_users', JSON.stringify(users));
+                
+                alert('Registration successful! Your M-Pesa number is now your account number. You can now login.');
                 registerForm.reset();
                 nationalIdSuccess.classList.remove('show');
                 phoneSuccess.classList.remove('show');
                 passwordSuccess.classList.remove('show');
-                emailSuccess.classList.remove('show');
+                currentUser = newUser;
+                updateAuthUI();
+                showPage('dashboard');
+                userGreeting.textContent = `Welcome, ${firstName}!`;
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+                loadUserData();
+                refreshAdminStats();
+                updateUserLimitUI();
             }
         });
 
@@ -2910,7 +2656,7 @@
         statusBtn.addEventListener('click', () => { 
             if (!currentUser) { showLoginModal(); return; }
             const activeCount = participations.filter(p => p.userId === currentUser?.id && p.status === 'active').length;
-            alert(`Account Status:\nName: ${currentUser.firstName} ${currentUser.lastName}\nEmail: ${currentUser.email}\nAccount: ${currentUser.phoneNumber}\nNational ID: ${currentUser.nationalId}\nStatus: ${currentUser.status.toUpperCase()}\nVerified: ${currentUser.verified ? 'YES' : 'NO'}\nActive Participations: ${activeCount}`);
+            alert(`Account Status:\nName: ${currentUser.firstName} ${currentUser.lastName}\nAccount Number: ${currentUser.phoneNumber}\nNational ID: ${currentUser.nationalId}\nStatus: ${currentUser.status.toUpperCase()}\nVerified: ${currentUser.verified ? 'YES' : 'NO'}\nActive Participations: ${activeCount}`);
         });
         
         inviteBtn.addEventListener('click', () => { if (currentUser) alert(`Invite a Friend!\nShare your code: ${currentUser.referralCode}\nEarn Ksh ${settings.referralBonus} per referral!`); else showLoginModal(); });
@@ -3063,7 +2809,7 @@
             
             const totalParticipated = userParticipations.reduce((sum, p) => sum + p.amount, 0);
             const activePackages = userParticipations.filter(p => p.status === 'active').length;
-            document.getElementById('account-summary').innerHTML = `<div><strong>Email:</strong> ${currentUser.email}</div><div><strong>Account:</strong> ${currentUser.phoneNumber}</div><div><strong>National ID:</strong> ${currentUser.nationalId}</div><div><strong>Total Participated:</strong> Ksh ${totalParticipated.toLocaleString()}</div><div><strong>Active Packages:</strong> ${activePackages}</div>`;
+            document.getElementById('account-summary').innerHTML = `<div><strong>Account Number:</strong> ${currentUser.phoneNumber}</div><div><strong>National ID:</strong> ${currentUser.nationalId}</div><div><strong>Total Participated:</strong> Ksh ${totalParticipated.toLocaleString()}</div><div><strong>Active Packages:</strong> ${activePackages}</div>`;
             
             const transactionsBody = document.getElementById('user-transactions-body');
             if (userParticipations.length === 0) transactionsBody.innerHTML = '<tr><td colspan="4">No transactions yet<\/td><\/tr>';
@@ -3083,12 +2829,11 @@
             document.getElementById('admin-total-volume').textContent = `Ksh ${totalVolume.toLocaleString()}`;
             
             const usersBody = document.getElementById('admin-users-body');
-            if (users.length === 0) usersBody.innerHTML = '<tr><td colspan="8">No users yet<\/td><\/tr>';
+            if (users.length === 0) usersBody.innerHTML = '<tr><td colspan="7">No users yet<\/td><\/tr>';
             else usersBody.innerHTML = users.map(user => `
                 <tr>
                     <td>${user.id}<\/td>
                     <td>${user.firstName} ${user.lastName}<\/td>
-                    <td>${user.email || 'N/A'}<\/td>
                     <td>${user.phoneNumber}<\/td>
                     <td>${user.nationalId}<\/td>
                     <td><span class="status-badge status-${user.status}">${user.status.toUpperCase()}<\/span><\/td>
@@ -3184,7 +2929,7 @@
                 alert(`Cannot add sample. User limit of ${maxUsers} reached.`);
                 return;
             }
-            const sampleUser = { id: Date.now(), firstName: 'Sample', lastName: 'User', email: 'sample@blsols.com', nationalId: 'SAMPLE123', phoneNumber: '+254712345678', password: 'sample123', registeredDate: new Date().toISOString(), status: 'active', verified: true, emailVerified: true, referralCode: 'SAMPLE123', referralEarnings: 0 };
+            const sampleUser = { id: Date.now(), firstName: 'Sample', lastName: 'User', nationalId: 'SAMPLE123', phoneNumber: '+254712345678', password: 'sample123', registeredDate: new Date().toISOString(), status: 'active', verified: true, referralCode: 'SAMPLE123', referralEarnings: 0 };
             users.push(sampleUser);
             localStorage.setItem('blsols_users', JSON.stringify(users));
             refreshAdminStats();
@@ -3226,8 +2971,9 @@
             if (lower.includes('claim')) return "Go to Claim section. Recommitment fee: 20% (5/10 days) or 50% (24HRS).";
             if (lower.includes('package')) return "24HRS (50% fee), 5 DAYS (20% fee), 10 DAYS (20% fee). Each gives 100% returns!";
             if (lower.includes('contact')) return "Call/WhatsApp: 0759184375 or 0787959119";
-            if (lower.includes('login')) return "Login using your phone number and password.";
-            return "I'm here to help with M-Pesa, packages, claims, login, and support!";
+            if (lower.includes('login')) return "Login using your phone number (account number) and password.";
+            if (lower.includes('register')) return "Register with your M-Pesa number as your account number, National ID, and create a password.";
+            return "I'm here to help with M-Pesa, packages, claims, login, registration, and support!";
         }
 
         document.getElementById('activateLimiterBtn').addEventListener('click', applyUserLimit);
